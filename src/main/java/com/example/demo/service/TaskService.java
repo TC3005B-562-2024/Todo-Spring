@@ -9,11 +9,18 @@ import org.springframework.stereotype.Service;
 import com.example.demo.model.Task;
 import com.example.demo.model.User;
 import com.example.demo.repository.TaskRepository;
+import com.example.demo.repository.UserRepository;
 
 @Service
 public class TaskService {
     @Autowired
     private TaskRepository taskRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+    public Iterable<Task> findAll(){
+        return taskRepository.findAll();
+    }
 
     public Task save(Task todo){
         return taskRepository.save(todo);
@@ -37,4 +44,24 @@ public class TaskService {
         
         return users;
     }
+
+    public boolean addUserToTask(int taskId, int userId) {
+        Optional<Task> optionalTask = taskRepository.findById(taskId);
+        if (!optionalTask.isPresent()) {
+            return false;
+        }
+
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (!optionalUser.isPresent()) {
+            return false;
+        }
+
+        Task task = optionalTask.get();
+        User user = optionalUser.get();
+
+        task.getRelatedUsers().add(user);
+        taskRepository.save(task);
+        return true;
+    }
+    
 }

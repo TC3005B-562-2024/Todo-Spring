@@ -44,4 +44,21 @@ public class TodoService {
         }
     }
 
+    public boolean checkCopletion(int id){
+        Todo todo=findById(id);
+        if(todo!=null){
+            List<Task> tasks = todo.getTasks();
+            for (Task task : tasks){
+                if (!task.isIs_complete()){
+                    return false;
+                }
+            }
+
+        }else{
+            return false;
+        }
+
+        return true;
+    }
+
 }

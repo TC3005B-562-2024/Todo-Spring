@@ -4,6 +4,8 @@ package com.example.demo.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 public class Task {
     @Id
@@ -17,6 +19,14 @@ public class Task {
     private Todo todo;
 
     private boolean is_complete;
+
+    @ManyToMany
+    @JoinTable(
+            name = "usertask",
+            joinColumns = @JoinColumn(name = "taskid"),
+            inverseJoinColumns = @JoinColumn(name = "userid")
+    )
+    Set<User> relatedUsers;
 
     public boolean isIs_complete() {
         return is_complete;

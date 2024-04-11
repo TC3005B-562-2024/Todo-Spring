@@ -37,15 +37,16 @@ public class TodoController {
         List<TodoListDTO> response=new ArrayList<>();
         List<Todo> dbTodos=todoService.findAll();
         dbTodos.forEach(todo -> response.add(new TodoListDTO(todo)));
-        Task task1=dbTodos.get(0).getTasks().get(0);
+
+        for()
 
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/find/{id}")
     public ResponseEntity<?> getTodoById(@PathVariable int id){
-
-        return ResponseEntity.ok(todoService.findById(id));
+        Todo todo = todoService.findById(id);
+        return ResponseEntity.ok(todo);
     }
 
     @PutMapping("/update")
@@ -66,4 +67,6 @@ public class TodoController {
         taskService.save(task);
         return ResponseEntity.ok("Task marked as completed!");
     }
+
+
 }

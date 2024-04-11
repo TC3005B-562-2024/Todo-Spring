@@ -10,6 +10,15 @@ public class TodoListDTO {
     }
     private int id;
     private String description;
+    private boolean is_complete;
+
+    public boolean isIs_complete() {
+        return is_complete;
+    }
+
+    public void setIs_complete(boolean is_complete) {
+        this.is_complete = is_complete;
+    }
 
     public int getId() {
         return id;

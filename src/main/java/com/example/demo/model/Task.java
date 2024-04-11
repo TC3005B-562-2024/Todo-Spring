@@ -59,4 +59,13 @@ public class Task {
     public void setTodo(Todo todo) {
         this.todo = todo;
     }
+
+    public Set<User> getRelatedUsers() {
+        return relatedUsers;
+    }
+
+    public void setRelatedUsers(Set<User> relatedUsers) {
+        this.relatedUsers = relatedUsers;
+    }
+    
 }

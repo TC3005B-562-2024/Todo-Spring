@@ -36,9 +36,13 @@ public class TodoController {
     public ResponseEntity<?> getAllTodos(){
         List<TodoListDTO> response=new ArrayList<>();
         List<Todo> dbTodos=todoService.findAll();
-        dbTodos.forEach(todo -> response.add(new TodoListDTO(todo)));
 
-        for()
+        for(Todo todo : dbTodos) {
+            TodoListDTO dto = new TodoListDTO(todo);
+            dto.setIs_complete(todoService.checkCopletion(dto.getId()));
+
+            response.add(dto);
+        }
 
         return ResponseEntity.ok(response);
     }
